@@ -1,0 +1,168 @@
+(node:16368) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error: Cannot find module '../../../libraries/nestjs-libraries/src/sentry/initialize.sentry'
+Require stack:
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1576:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Object.<anonymous> (C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\src\main.ts:1:1)
+    at Module._compile (node:internal/modules/cjs/loader:1830:14)
+Error: Cannot find module 'C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+Error: Cannot find module '../../dtos/posts/providers-settings/youtube.settings.dto'
+Require stack:
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\integrations\social\youtube.provider.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\integrations\integration.manager.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\integrations\integration.service.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\subscriptions\subscription.service.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\database.module.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\app.module.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1576:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Object.<anonymous> (C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\integrations\social\youtube.provider.js:8:32)
+    at Module._compile (node:internal/modules/cjs/loader:1830:14)
+Error: Cannot find module '../../dtos/posts/providers-settings/youtube.settings.dto'
+Require stack:
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\integrations\social\youtube.provider.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\integrations\integration.manager.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\integrations\integration.service.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\subscriptions\subscription.service.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\database.module.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\app.module.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1576:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Object.<anonymous> (C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\integrations\social\youtube.provider.js:8:32)
+    at Module._compile (node:internal/modules/cjs/loader:1830:14)
+Error: Cannot find module './app.module'
+Require stack:
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1576:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Object.<anonymous> (C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main.js:15:22)
+    at Module._compile (node:internal/modules/cjs/loader:1830:14)
+Error: Cannot find module 'C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+Error: Cannot find module './social/nostr.provider'
+Require stack:
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\integrations\integration.manager.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\integrations\integration.service.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\subscriptions\subscription.service.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\database.module.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\app.module.js
+- C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1576:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Object.<anonymous> (C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\integrations\integration.manager.js:29:26)
+    at Module._compile (node:internal/modules/cjs/loader:1830:14)
+    at Object..js (node:internal/modules/cjs/loader:1961:10)
+    at Module.load (node:internal/modules/cjs/loader:1553:32)
+    at Module._load (node:internal/modules/cjs/loader:1355:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1576:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Object.<anonymous> (C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\libraries\nestjs-libraries\src\database\prisma\integrations\integration.service.js:7:31)
+    at Module._compile (node:internal/modules/cjs/loader:1830:14)
+    at Object..js (node:internal/modules/cjs/loader:1961:10)
+    at Module.load (node:internal/modules/cjs/loader:1553:32)
+    at Module._load (node:internal/modules/cjs/loader:1355:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+Error: Cannot find module 'C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+Error: Cannot find module 'C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+Error: Cannot find module 'C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+Error: Cannot find module 'C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+Error: Cannot find module 'C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+Error: Cannot find module 'C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\backend\dist\apps\backend\src\main'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47

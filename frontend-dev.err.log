@@ -1,0 +1,202 @@
+[browser] CopilotKit Error (hidden in production): CombinedError: [Network] Unknown error occurred (<anonymous>)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/auth" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+            <SegmentViewNode type="page" pagePath="(app)/auth...">
+              <SegmentTrieNode>
+              <Auth>
+                <Register>
+                  <RegisterAfter token="" provider="LOCAL">
+                    <FormProvider control={{...}} subscribe={function subscribe} trigger={function trigger} ...>
+                      <form className="flex-1 flex" onSubmit={function}>
+                        <div className="flex flex-...">
+                          <div>
+                            <h1 className="text-[40px] font-[500] -tracking-[0.8px] text-start cursor-pointer">
++                             Registrarse
+-                             Sign Up
+                          ...
+            ...
+          ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at h1 (<anonymous>)
+    at RegisterAfter (src/components/auth/register.tsx:153:13)
+    at Register (src/components/auth/register.tsx:66:12)
+    at Auth (src\app\(app)\auth\page.tsx:34:10)
+  151 |         <div className="flex flex-col flex-1">
+  152 |           <div>
+> 153 |             <h1 className="text-[40px] font-[500] -tracking-[0.8px] text-start cursor-poi...
+      |             ^
+  154 |               {t('sign_up', 'Sign Up')}
+  155 |             </h1>
+  156 |           </div>
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/auth" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+            <SegmentViewNode type="page" pagePath="(app)/auth...">
+              <SegmentTrieNode>
+              <Auth>
+                <Register>
+                  <RegisterAfter token="" provider="LOCAL">
+                    <FormProvider control={{...}} subscribe={function subscribe} trigger={function trigger} ...>
+                      <form className="flex-1 flex" onSubmit={function}>
+                        <div className="flex flex-...">
+                          <div>
+                            <h1 className="text-[40px] font-[500] -tracking-[0.8px] text-start cursor-pointer">
++                             Registrarse
+-                             Sign Up
+                          ...
+            ...
+          ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at h1 (<anonymous>)
+    at RegisterAfter (src/components/auth/register.tsx:153:13)
+    at Register (src/components/auth/register.tsx:66:12)
+    at Auth (src\app\(app)\auth\page.tsx:34:10)
+  151 |         <div className="flex flex-col flex-1">
+  152 |           <div>
+> 153 |             <h1 className="text-[40px] font-[500] -tracking-[0.8px] text-start cursor-poi...
+      |             ^
+  154 |               {t('sign_up', 'Sign Up')}
+  155 |             </h1>
+  156 |           </div>
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] CopilotKit Error (hidden in production): CombinedError: [Network] Unknown error occurred (<anonymous>)
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async SettingsPopup.useCallback[loadProfile] (src/components/layout/settings.component.tsx:58:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async ProfileComponent.useCallback[loadProfile] (src/components/settings/profile.component.tsx:45:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {
+[browser] ⨯ unhandledRejection: TypeError: Failed to fetch
+    at newFetch (../../libraries/helpers/src/utils/custom.fetch.func.ts:46:32)
+    at async ProfileComponent.useCallback[loadProfile] (src/components/settings/profile.component.tsx:45:29)
+  44 |             ?.split('=')[1];
+  45 |
+> 46 |     const fetchRequest = await fetch(params.baseUrl + url, {
+     |                                ^
+  47 |       ...(secured ? { credentials: 'include' } : {}),
+  48 |       ...(newRequestObject || options),
+  49 |       headers: {

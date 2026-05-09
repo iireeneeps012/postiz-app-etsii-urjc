@@ -1,0 +1,123 @@
+
+> gitroom@1.0.0 dev:frontend C:\Users\irepe\Documents\postiz-app-main\postiz-app-main
+> node -e "fs.rmSync('apps/frontend/dist', { recursive: true, force: true })" && pnpm --filter ./apps/frontend run dev
+
+
+> postiz-frontend@1.0.0 dev C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\frontend
+> dotenv -e ../../.env -- next dev -p 4200
+
+▲ Next.js 16.2.1 (Turbopack)
+- Local:         http://localhost:4200
+- Network:       http://192.168.56.1:4200
+✓ Ready in 1076ms
+Creating turbopack project {
+  dir: 'C:\\Users\\irepe\\Documents\\postiz-app-main\\postiz-app-main\\apps\\frontend',
+  testMode: true
+}
+- Experiments (use with caution):
+  · clientTraceMetadata
+  · proxyTimeout: 90000
+
+🌐 i18next is maintained with support from Locize — consider powering your project with managed localization (AI, CDN, integrations): https://locize.com 💙
+ GET /auth 200 in 1252ms (next.js: 155ms, proxy.ts: 8ms, application-code: 1089ms)
+○ Compiling /launches ...
+ GET /launches?onboarding=true 200 in 196ms (next.js: 12ms, proxy.ts: 11ms, application-code: 172ms)
+○ Compiling /third-party ...
+ GET /third-party 200 in 12.2s (next.js: 11.8s, proxy.ts: 7ms, application-code: 327ms)
+ GET /plugs 200 in 10.9s (next.js: 10.7s, proxy.ts: 7ms, application-code: 196ms)
+ GET /plugs 200 in 213ms (next.js: 22ms, proxy.ts: 12ms, application-code: 179ms)
+ GET /plugs 200 in 118ms (next.js: 17ms, proxy.ts: 24ms, application-code: 78ms)
+ GET /agents 200 in 10.8s (next.js: 10.6s, proxy.ts: 11ms, application-code: 134ms)
+ GET /agents 200 in 88ms (next.js: 9ms, proxy.ts: 11ms, application-code: 68ms)
+○ Compiling /agents/[id] ...
+ GET /agents/new 200 in 6.7s (next.js: 6.6s, proxy.ts: 11ms, application-code: 43ms)
+✓ Finished filesystem cache database compaction in 10.7s
+ GET /plugs 200 in 84ms (next.js: 28ms, proxy.ts: 14ms, application-code: 42ms)
+ GET /third-party 200 in 61ms (next.js: 9ms, proxy.ts: 7ms, application-code: 45ms)
+○ Compiling /settings ...
+ GET /settings 200 in 6.8s (next.js: 6.7s, proxy.ts: 5ms, application-code: 93ms)
+✓ Compiled in 1354ms
+✓ Compiled in 2.5s
+ GET /settings 200 in 3.7s (next.js: 621ms, proxy.ts: 28ms, application-code: 3.0s)
+ GET /auth?provider=GENERIC 200 in 210ms (next.js: 17ms, proxy.ts: 10ms, application-code: 183ms)
+ GET /auth 200 in 137ms (next.js: 5ms, proxy.ts: 9ms, application-code: 122ms)
+ GET /launches?onboarding=true 200 in 137ms (next.js: 16ms, proxy.ts: 11ms, application-code: 110ms)
+ GET /launches 200 in 63ms (next.js: 6ms, proxy.ts: 7ms, application-code: 49ms)
+ GET /settings 200 in 180ms (next.js: 9ms, proxy.ts: 7ms, application-code: 164ms)
+ GET /settings 200 in 71ms (next.js: 9ms, proxy.ts: 8ms, application-code: 54ms)
+ GET /agents 200 in 75ms (next.js: 20ms, proxy.ts: 8ms, application-code: 48ms)
+ GET /agents/new 200 in 128ms (next.js: 60ms, proxy.ts: 15ms, application-code: 54ms)
+ GET /launches 200 in 58ms (next.js: 8ms, proxy.ts: 9ms, application-code: 41ms)
+ GET /plugs 200 in 62ms (next.js: 14ms, proxy.ts: 5ms, application-code: 42ms)
+ GET /settings 200 in 108ms (next.js: 7ms, proxy.ts: 6ms, application-code: 94ms)
+ GET /launches 200 in 101ms (next.js: 8ms, proxy.ts: 7ms, application-code: 86ms)
+ GET /settings 200 in 48ms (next.js: 6ms, proxy.ts: 5ms, application-code: 37ms)
+ GET /launches 200 in 151ms (next.js: 11ms, proxy.ts: 8ms, application-code: 132ms)
+ GET /auth 200 in 147ms (next.js: 6ms, proxy.ts: 6ms, application-code: 135ms)
+ GET /launches?onboarding=true 200 in 121ms (next.js: 9ms, proxy.ts: 9ms, application-code: 103ms)
+ GET /settings 200 in 25ms (next.js: 4ms, proxy.ts: 4ms, application-code: 18ms)
+ GET /auth 200 in 141ms (next.js: 8ms, proxy.ts: 8ms, application-code: 125ms)
+ GET /launches?onboarding=true 200 in 123ms (next.js: 12ms, proxy.ts: 12ms, application-code: 99ms)
+ GET /third-party 200 in 52ms (next.js: 11ms, proxy.ts: 5ms, application-code: 36ms)
+ GET /settings 200 in 33ms (next.js: 4ms, proxy.ts: 4ms, application-code: 25ms)
+ GET /settings 200 in 100ms (next.js: 6ms, proxy.ts: 5ms, application-code: 89ms)
+✓ Compiled in 823ms
+ GET /settings 200 in 2.1s (next.js: 440ms, proxy.ts: 6ms, application-code: 1668ms)
+ GET /settings 200 in 71ms (next.js: 4ms, proxy.ts: 5ms, application-code: 62ms)
+✓ Compiled in 1275ms
+ GET /settings 200 in 1810ms (next.js: 354ms, proxy.ts: 7ms, application-code: 1449ms)
+✓ Compiled in 1012ms
+✓ Compiled in 720ms
+ GET /launches 200 in 69ms (next.js: 11ms, proxy.ts: 12ms, application-code: 46ms)
+✓ Compiled in 785ms
+ GET /third-party 200 in 306ms (next.js: 22ms, proxy.ts: 17ms, application-code: 266ms)
+ GET /settings 200 in 1445ms (next.js: 1208ms, proxy.ts: 12ms, application-code: 225ms)
+ GET /plugs 200 in 43ms (next.js: 8ms, proxy.ts: 3ms, application-code: 31ms)
+ GET /third-party 200 in 32ms (next.js: 4ms, proxy.ts: 4ms, application-code: 23ms)
+ GET /settings 200 in 50ms (next.js: 6ms, proxy.ts: 8ms, application-code: 36ms)
+✓ Compiled in 1003ms
+✓ Compiled in 730ms
+✓ Compiled in 919ms
+✓ Compiled in 723ms
+ GET /launches 200 in 850ms (next.js: 785ms, proxy.ts: 7ms, application-code: 58ms)
+ GET /agents 200 in 581ms (next.js: 480ms, proxy.ts: 10ms, application-code: 91ms)
+ GET /agents/new 200 in 604ms (next.js: 485ms, proxy.ts: 15ms, application-code: 104ms)
+○ Compiling /analytics ...
+ GET /launches 200 in 54ms (next.js: 6ms, proxy.ts: 8ms, application-code: 40ms)
+ GET /launches 200 in 82ms (next.js: 22ms, proxy.ts: 9ms, application-code: 52ms)
+ GET /analytics 200 in 12.1s (next.js: 12.0s, proxy.ts: 14ms, application-code: 111ms)
+ GET /analytics 200 in 7.9s (next.js: 7.8s, proxy.ts: 13ms, application-code: 66ms)
+ GET /media 200 in 7.1s (next.js: 7.0s, proxy.ts: 10ms, application-code: 79ms)
+ GET /agents 200 in 60ms (next.js: 9ms, proxy.ts: 7ms, application-code: 44ms)
+ GET /agents/new 200 in 100ms (next.js: 28ms, proxy.ts: 12ms, application-code: 60ms)
+ GET /analytics 200 in 59ms (next.js: 7ms, proxy.ts: 7ms, application-code: 45ms)
+ GET /plugs 200 in 569ms (next.js: 502ms, proxy.ts: 15ms, application-code: 52ms)
+ GET /media 200 in 56ms (next.js: 9ms, proxy.ts: 7ms, application-code: 41ms)
+ GET /settings 200 in 649ms (next.js: 573ms, proxy.ts: 15ms, application-code: 61ms)
+ GET /settings 200 in 48ms (next.js: 7ms, proxy.ts: 6ms, application-code: 35ms)
+✓ Compiled in 714ms
+✓ Compiled in 839ms
+✓ Compiled in 1251ms
+ GET /settings 200 in 2.6s (next.js: 462ms, proxy.ts: 141ms, application-code: 2000ms)
+ GET /settings 200 in 1865ms (next.js: 1677ms, proxy.ts: 23ms, application-code: 164ms)
+ GET /settings 200 in 2.6s (next.js: 528ms, proxy.ts: 141ms, application-code: 1940ms)
+ GET /settings 200 in 1859ms (next.js: 973ms, proxy.ts: 792ms, application-code: 95ms)
+ GET /settings 200 in 2.5s (next.js: 33ms, proxy.ts: 579ms, application-code: 1857ms)
+ GET /settings 200 in 2.5s (next.js: 79ms, proxy.ts: 580ms, application-code: 1809ms)
+✓ Compiled in 1655ms
+ GET /settings 200 in 1022ms (next.js: 383ms, proxy.ts: 123ms, application-code: 516ms)
+ GET /settings 200 in 1028ms (next.js: 458ms, proxy.ts: 122ms, application-code: 448ms)
+ GET /settings 200 in 413ms (next.js: 9ms, proxy.ts: 11ms, application-code: 393ms)
+ GET /settings 200 in 415ms (next.js: 58ms, proxy.ts: 12ms, application-code: 345ms)
+ GET /settings 200 in 308ms (next.js: 16ms, proxy.ts: 26ms, application-code: 266ms)
+ GET /settings 200 in 308ms (next.js: 67ms, proxy.ts: 26ms, application-code: 216ms)
+ GET /settings 200 in 298ms (next.js: 118ms, proxy.ts: 18ms, application-code: 162ms)
+ GET /settings 200 in 299ms (next.js: 159ms, proxy.ts: 18ms, application-code: 122ms)
+✓ Compiled in 617ms
+ GET /settings 200 in 2.9s (next.js: 465ms, proxy.ts: 14ms, application-code: 2.4s)
+ GET /media 200 in 160ms (next.js: 45ms, proxy.ts: 13ms, application-code: 102ms)
+ GET /media 200 in 223ms (next.js: 21ms, proxy.ts: 14ms, application-code: 188ms)
+C:\Users\irepe\Documents\postiz-app-main\postiz-app-main\apps\frontend:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  postiz-frontend@1.0.0 dev: `dotenv -e ../../.env -- next dev -p 4200`
+Exit status 4294967295
+ WARN   Local package.json exists, but node_modules missing, did you mean to install?

@@ -1,0 +1,10 @@
+{
+  "name": "postiz-extension",
+  "version": "2.0.0",
+  "description": "Postiz browser extension for cookie-based platform authentication",
+  "scripts": {
+    "build": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\" && vite build && node -e \"fs.copyFileSync('manifest.json', 'dist/manifest.json')\" && cd dist && zip -r ../extension.zip .",
+    "dev": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\" && cross-env HOT_RELOAD_EXTENSION_VITE_PORT=8082 NODE_ENV=development dotenv -e ../../.env -- vite build --config vite.config.chrome.ts --mode development --watch"
+  },
+  "type": "module"
+}
