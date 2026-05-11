@@ -2,7 +2,7 @@ services:
   postiz:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
       args:
         NEXT_PUBLIC_VERSION: ${NEXT_PUBLIC_VERSION:-local}
     image: postiz-etsii:local
