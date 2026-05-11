@@ -1,6 +1,6 @@
 import { PrismaRepository } from '@gitroom/nestjs-libraries/database/prisma/prisma.service';
 import { Role, ShortLinkPreference, SubscriptionTier } from '@prisma/client';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { AuthService } from '@gitroom/helpers/auth/auth.service';
 import { CreateOrgUserDto } from '@gitroom/nestjs-libraries/dtos/auth/create.org.user.dto';
 import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
@@ -42,13 +42,14 @@ export class OrganizationRepository {
                   : `${saasName}+` + makeId(10) + '@postiz.com',
                 name: name ? `${name}###${id}` : `Unnamed User###${id}`,
                 providerName: 'LOCAL',
+                mustChangePassword: false,
                 password: AuthService.hashPassword(makeId(500)),
                 timezone: 0,
               },
             },
           },
         },
-      },
+      } as any,
     });
   }
 
@@ -257,6 +258,46 @@ export class OrganizationRepository {
     return create;
   }
 
+  async createTeamMember(
+    orgId: string,
+    body: { email: string; password: string; role: 'USER' | 'ADMIN' }
+  ) {
+    const existingUser = await this._user.model.user.findFirst({
+      where: {
+        email: body.email,
+        providerName: 'LOCAL',
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (existingUser) {
+      throw new BadRequestException('Email already exists');
+    }
+
+    return this._user.model.user.create({
+      data: {
+        activated: true,
+        email: body.email,
+        mustChangePassword: true,
+        password: AuthService.hashPassword(body.password),
+        providerName: 'LOCAL',
+        timezone: 0,
+        organizations: {
+          create: {
+            organizationId: orgId,
+            role: body.role,
+          },
+        },
+      } as any,
+      select: {
+        id: true,
+        email: true,
+      },
+    });
+  }
+
   async createOrgAndUser(
     body: Omit<CreateOrgUserDto, 'providerToken'> & { providerId?: string },
     hasEmail: boolean,
@@ -282,6 +323,7 @@ export class OrganizationRepository {
           data: {
             activated: body.provider !== 'LOCAL' || !hasEmail,
             email: body.email,
+            mustChangePassword: false,
             password: body.password
               ? AuthService.hashPassword(body.password)
               : '',
@@ -296,7 +338,7 @@ export class OrganizationRepository {
                 role: Role.USER,
               },
             },
-          },
+          } as any,
           select: {
             id: true,
             email: true,
@@ -330,9 +372,9 @@ export class OrganizationRepository {
             },
           },
         })
-        .then(({ organizations, ...user }) => ({
-          id: organizations[0].organizationId,
-          users: [{ user }],
+        .then((created: any) => ({
+          id: created.organizations[0].organizationId,
+          users: [{ user: { ...created, organizations: undefined } }],
         }));
     }
 
@@ -349,6 +391,7 @@ export class OrganizationRepository {
               create: {
                 activated: body.provider !== 'LOCAL' || !hasEmail,
                 email: body.email,
+                mustChangePassword: false,
                 password: body.password
                   ? AuthService.hashPassword(body.password)
                   : '',
@@ -361,7 +404,7 @@ export class OrganizationRepository {
             },
           },
         },
-      },
+      } as any,
       select: {
         id: true,
         users: {

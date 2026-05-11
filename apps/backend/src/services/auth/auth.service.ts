@@ -58,18 +58,19 @@ export class AuthService {
           ip,
           userAgent
         );
+        const createdUser = (create as any).users[0].user;
 
         const addedOrg =
           addToOrg && typeof addToOrg !== 'boolean'
             ? await this._organizationService.addUserToOrg(
-                create.users[0].user.id,
+                createdUser.id,
                 addToOrg.id,
                 addToOrg.orgId,
                 addToOrg.role
               )
             : false;
 
-        const obj = { addedOrg, jwt: await this.jwt(create.users[0].user) };
+        const obj = { addedOrg, jwt: await this.jwt(createdUser) };
         await this._emailService.sendEmail(
           body.email,
           'Activate your account',
@@ -168,6 +169,7 @@ export class AuthService {
       ip,
       userAgent
     );
+    const createdUser = (create as any).users[0].user;
 
     this._track('register', providerUser.email, body.datafast_visitor_id).catch(
       (err) => {}
@@ -183,7 +185,7 @@ export class AuthService {
       // Don't fail registration if postRegistration fails
     }
 
-    return create.users[0].user;
+    return createdUser;
   }
 
   private async _track(

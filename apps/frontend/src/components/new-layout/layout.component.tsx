@@ -42,6 +42,7 @@ import { PreConditionComponent } from '@gitroom/frontend/components/layout/pre-c
 import { AttachToFeedbackIcon } from '@gitroom/frontend/components/new-layout/sentry.feedback.component';
 import { FirstBillingComponent } from '@gitroom/frontend/components/billing/first.billing.component';
 import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
+import { ProfileComponent } from '@gitroom/frontend/components/settings/profile.component';
 
 const jakartaSans = Plus_Jakarta_Sans({
   weight: ['600', '500', '700'],
@@ -114,6 +115,31 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
 
   if (!user) return null;
 
+  if (user.mustChangePassword) {
+    return (
+      <ContextWrapper user={user}>
+        <MantineWrapper>
+          <Toaster />
+          <div
+            className={clsx(
+              'flex min-h-screen min-w-screen items-center justify-center bg-newBgLineColor text-newTextColor p-[24px]',
+              jakartaSans.className
+            )}
+          >
+            <div className="w-full max-w-[720px] rounded-[16px] border border-newTableBorder bg-newBgColorInner p-[24px]">
+              <ProfileComponent
+                forcePasswordChange={true}
+                onPasswordChanged={async () => {
+                  await mutate();
+                }}
+              />
+            </div>
+          </div>
+        </MantineWrapper>
+      </ContextWrapper>
+    );
+  }
+
   return (
     <ContextWrapper user={user}>
       <CopilotKit
@@ -139,7 +165,10 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
               )}
             >
               <div>{user?.admin ? <Impersonate /> : <div />}</div>
-              {user.tier === 'FREE' && isGeneral && billingEnabled ? (
+              {user.tier === 'FREE' &&
+              isGeneral &&
+              billingEnabled &&
+              (user.role === 'ADMIN' || user.role === 'SUPERADMIN') ? (
                 <FirstBillingComponent />
               ) : (
                 <>

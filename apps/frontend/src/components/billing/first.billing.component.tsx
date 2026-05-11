@@ -81,12 +81,15 @@ export const FirstBillingComponent = () => {
 
   const showYouTube = () => {
     modals.openModal({
-      title: 'Grow Fast With Postiz (Play the video)',
+      title: t(
+        'billing_watch_video_title',
+        'Grow Fast With Postiz (Play the video)'
+      ),
       children: (
         <iframe
           className="h-full aspect-video min-w-[800px]"
           src="https://www.youtube.com/embed/BdsCVvEYgHU?si=vvhaZJ8I5oXXvVJS?autoplay=1"
-          title="Postiz Tutorial"
+          title={t('postiz_tutorial', 'Postiz Tutorial')}
           allow="autoplay"
           allowFullScreen
         />
@@ -137,7 +140,12 @@ export const FirstBillingComponent = () => {
                 alt="YouTube"
               />
             </div>
-            <div>See the power of Postiz (click here)</div>
+            <div>
+              {t(
+                'billing_see_the_power',
+                'See the power of Postiz (click here)'
+              )}
+            </div>
           </div>
         </div>
 

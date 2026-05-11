@@ -103,6 +103,7 @@ export class UsersController {
       isTrailing: !process.env.STRIPE_PUBLISHABLE_KEY ? false : org?.isTrailing,
       allowTrial: org?.allowTrial,
       streakSince: org?.streakSince || null,
+      mustChangePassword: !!(user as any).mustChangePassword,
       publicApi:
         org?.users?.[0]?.role === 'SUPERADMIN' ||
         org?.users?.[0]?.role === 'ADMIN'

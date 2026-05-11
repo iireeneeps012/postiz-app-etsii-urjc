@@ -5,6 +5,7 @@ import { FetchWrapperComponent } from '@gitroom/helpers/utils/custom.fetch';
 import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
 import { useReturnUrl } from '@gitroom/frontend/app/(app)/auth/return.url.component';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
+import { useT } from '@gitroom/react/translation/get.transation.service.client';
 export default function LayoutContext(params: { children: ReactNode }) {
   if (params?.children) {
     // eslint-disable-next-line react/no-children-prop
@@ -24,6 +25,7 @@ export function setCookie(cname: string, cvalue: string, exdays: number) {
 function LayoutContextInner(params: { children: ReactNode }) {
   const returnUrl = useReturnUrl();
   const { backendUrl, isGeneral, isSecured } = useVariables();
+  const t = useT();
   const afterRequest = useCallback(
     async (url: string, options: RequestInit, response: Response) => {
       if (
@@ -91,10 +93,15 @@ function LayoutContextInner(params: { children: ReactNode }) {
       if (response.status === 406) {
         if (
           await deleteDialog(
-            'You are currently on trial, in order to use the feature you must finish the trial',
-            'Finish the trial, charge me now',
-            'Trial',
-
+            t(
+              'trial_upgrade_required_description',
+              'You are currently on trial, in order to use this feature you must finish the trial.'
+            ),
+            t(
+              'finish_trial_charge_now',
+              'Finish the trial, charge me now'
+            ),
+            t('trial', 'Trial')
           )
         ) {
           window.open('/billing?finishTrial=true', '_blank');
@@ -109,8 +116,8 @@ function LayoutContextInner(params: { children: ReactNode }) {
             (
               await response.json()
             ).message,
-            'Move to billing',
-            'Payment Required'
+            t('move_to_billing', 'Move to billing'),
+            t('payment_required', 'Payment Required')
           )
         ) {
           window.open('/billing', '_blank');
@@ -120,7 +127,7 @@ function LayoutContextInner(params: { children: ReactNode }) {
       }
       return true;
     },
-    []
+    [isGeneral, isSecured, returnUrl, t]
   );
   return (
     <FetchWrapperComponent baseUrl={backendUrl} afterRequest={afterRequest}>

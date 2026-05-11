@@ -3,7 +3,7 @@
 import { Button } from '@gitroom/react/form/button';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import useSWR from 'swr';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useUser } from '@gitroom/frontend/components/layout/user.context';
 import { capitalize } from 'lodash';
 import { useModals } from '@gitroom/frontend/components/layout/new-modal';
@@ -15,7 +15,6 @@ import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 import { AddTeamMemberDto } from '@gitroom/nestjs-libraries/dtos/settings/add.team.member.dto';
 import { useToaster } from '@gitroom/react/toaster/toaster';
 import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
-import copy from 'copy-to-clipboard';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import {
   ChevronDownIcon,
@@ -32,16 +31,61 @@ const roles = [
     value: 'ADMIN',
   },
 ];
+type AddMemberForm = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  role: string;
+  sendEmail: boolean;
+};
+
+const createSecurePassword = (length: number = 16) => {
+  const lower = 'abcdefghijkmnopqrstuvwxyz';
+  const upper = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+  const numbers = '23456789';
+  const symbols = '!@#$%^&*()-_=+?';
+  const all = lower + upper + numbers + symbols;
+  const required = [
+    lower[Math.floor(Math.random() * lower.length)],
+    upper[Math.floor(Math.random() * upper.length)],
+    numbers[Math.floor(Math.random() * numbers.length)],
+    symbols[Math.floor(Math.random() * symbols.length)],
+  ];
+
+  const randomValues = new Uint32Array(length - required.length);
+  crypto.getRandomValues(randomValues);
+
+  const generated = Array.from(
+    randomValues,
+    (value) => all[value % all.length]
+  );
+  const passwordChars = [...required, ...generated];
+
+  for (let index = passwordChars.length - 1; index > 0; index--) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [passwordChars[index], passwordChars[randomIndex]] = [
+      passwordChars[randomIndex],
+      passwordChars[index],
+    ];
+  }
+
+  return passwordChars.join('');
+};
+
 export const AddMember = () => {
   const modals = useModals();
   const fetch = useFetch();
   const toast = useToaster();
+  const t = useT();
+  const [generatedPassword, setGeneratedPassword] = useState('');
   const resolver = useMemo(() => {
     return classValidatorResolver(AddTeamMemberDto);
   }, []);
-  const form = useForm({
+  const form = useForm<AddMemberForm>({
     values: {
       email: '',
+      password: '',
+      confirmPassword: '',
       role: '',
       sendEmail: true,
     },
@@ -53,43 +97,138 @@ export const AddMember = () => {
     name: 'sendEmail',
   });
   const submit = useCallback(
-    async (values: { email: string; role: string; sendEmail: boolean }) => {
-      const { url } = await (
-        await fetch('/settings/team', {
-          method: 'POST',
-          body: JSON.stringify(values),
-        })
-      ).json();
-      if (values.sendEmail) {
-        modals.closeAll();
-        toast.show(t('invitation_link_sent', 'Invitation link sent'));
+    async (values: AddMemberForm) => {
+      if (values.password !== values.confirmPassword) {
+        form.setError('confirmPassword', {
+          message: t('passwords_do_not_match', 'Passwords do not match'),
+        });
         return;
       }
-      copy(url);
+
+      const response = await fetch('/settings/team', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+          role: values.role,
+          sendEmail: values.sendEmail,
+        }),
+      });
+
+      if (response.status >= 400) {
+        toast.show(await response.text(), 'warning');
+        return;
+      }
+      if (values.sendEmail) {
+        modals.closeAll();
+        toast.show(
+          t(
+            'team_credentials_sent',
+            'Team account created and credentials sent by email'
+          )
+        );
+        return;
+      }
       modals.closeAll();
-      toast.show(t('link_copied_to_clipboard', 'Link copied to clipboard'));
+      toast.show(
+        t(
+          'team_account_created_share_password',
+          'Team account created. Share the temporary password securely.'
+        )
+      );
     },
-    []
+    [fetch, form, modals, t, toast]
   );
 
-  const t = useT();
+  const generatePassword = useCallback(async () => {
+    const password = createSecurePassword();
+    form.setValue('password', password, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+    form.setValue('confirmPassword', password, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+    setGeneratedPassword(password);
+
+    try {
+      await navigator.clipboard.writeText(password);
+      toast.show(
+        t(
+          'temporary_password_generated_and_copied',
+          'Temporary password generated and copied to clipboard'
+        ),
+        'success'
+      );
+    } catch (error) {
+      toast.show(
+        t(
+          'temporary_password_generated',
+          'Temporary password generated successfully'
+        ),
+        'success'
+      );
+    }
+  }, [form, t, toast]);
 
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(submit)}>
         <div className="relative flex gap-[10px] flex-col flex-1 p-[16px] pt-0">
-          {sendEmail && (
-            <Input
-              label="Email"
-              placeholder={t('enter_email', 'Enter email')}
-              name="email"
-            />
-          )}
-          <Select label="Role" name="role">
+          <Input
+            label={t('email', 'Email')}
+            placeholder={t('enter_email', 'Enter email')}
+            name="email"
+          />
+          <Input
+            label={t('temporary_password', 'Temporary password')}
+            placeholder={t(
+              'temporary_password_placeholder',
+              'Enter a secure temporary password'
+            )}
+            name="password"
+            type="password"
+          />
+          <div className="flex gap-[8px] items-center">
+            <Button
+              type="button"
+              secondary={true}
+              className="rounded-[8px] px-[14px]"
+              onClick={generatePassword}
+            >
+              {t('generate_secure_password', 'Generate secure password')}
+            </Button>
+            {generatedPassword && (
+              <div className="text-[12px] text-customColor18 break-all">
+                {generatedPassword}
+              </div>
+            )}
+          </div>
+          <Input
+            label={t('confirm_temporary_password', 'Confirm temporary password')}
+            placeholder={t(
+              'confirm_temporary_password',
+              'Confirm temporary password'
+            )}
+            name="confirmPassword"
+            type="password"
+          />
+          <div className="text-[12px] text-customColor18">
+            {t(
+              'temporary_password_requirements',
+              'Use at least 12 characters with uppercase, lowercase, number and special character.'
+            )}
+          </div>
+          <Select label={t('label_role', 'Role')} name="role">
             <option value="">{t('select_role', 'Select Role')}</option>
             {roles.map((role) => (
               <option key={role.value} value={role.value}>
-                {role.name}
+                {role.value === 'USER'
+                  ? t('user', 'User')
+                  : t('admin', 'Admin')}
               </option>
             ))}
           </Select>
@@ -98,13 +237,16 @@ export const AddMember = () => {
               <Checkbox name="sendEmail" />
             </div>
             <div>
-              {t('send_invitation_via_email', 'Send invitation via email?')}
+              {t(
+                'send_credentials_via_email',
+                'Send credentials via email?'
+              )}
             </div>
           </div>
           <Button type="submit" className="mt-[18px]">
             {sendEmail
-              ? t('send_invitation_link', 'Send Invitation Link')
-              : t('copy_link', 'Copy Link')}
+              ? t('create_member_and_send_email', 'Create member and send email')
+              : t('create_member', 'Create member')}
           </Button>
         </div>
       </form>

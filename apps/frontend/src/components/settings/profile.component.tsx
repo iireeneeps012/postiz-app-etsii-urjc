@@ -18,7 +18,10 @@ type ProfileForm = {
   picture?: { id: string; path: string } | null;
 };
 
-export const ProfileComponent: FC = () => {
+export const ProfileComponent: FC<{
+  forcePasswordChange?: boolean;
+  onPasswordChanged?: () => void | Promise<void>;
+}> = ({ forcePasswordChange, onPasswordChanged }) => {
   const t = useT();
   const fetch = useFetch();
   const toaster = useToaster();
@@ -110,75 +113,91 @@ export const ProfileComponent: FC = () => {
       newPassword: '',
       confirmPassword: '',
     });
+    await onPasswordChanged?.();
     toaster.show(t('password_updated', 'Password updated'), 'success');
-  }, [fetch, passwords, toaster, t]);
+  }, [fetch, onPasswordChanged, passwords, toaster, t]);
 
   const canChangePassword = user?.providerName === 'LOCAL';
 
   return (
     <div className="flex flex-col">
-      <h3 className="text-[20px]">{t('profile', 'Profile')}</h3>
+      <h3 className="text-[20px]">
+        {forcePasswordChange
+          ? t('password_update_required', 'Password update required')
+          : t('profile', 'Profile')}
+      </h3>
       <div className="text-customColor18 mt-[4px]">
-        {t(
-          'profile_settings_description',
-          'Manage your personal information and account access'
-        )}
+        {forcePasswordChange
+          ? t(
+              'password_update_required_description',
+              'For security reasons, you need to change your temporary password before continuing.'
+            )
+          : t(
+              'profile_settings_description',
+              'Manage your personal information and account access'
+            )}
       </div>
 
-      <FormProvider {...form}>
-        <div className="my-[16px] mt-[16px] bg-sixth border-fifth border rounded-[4px] p-[24px] flex flex-col gap-[20px]">
-          <div className="flex items-center gap-[16px]">
-            <div className="h-[64px] w-[64px] rounded-full bg-newBgColorInner border border-newTableBorder overflow-hidden flex items-center justify-center text-[24px] font-[600]">
-              {picture?.path ? (
-                <img
-                  src={picture.path}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                (user?.email || '?').slice(0, 1).toUpperCase()
-              )}
-            </div>
-            <div className="flex gap-[8px]">
-              <Button type="button" onClick={openMedia}>
-                {t('change_picture', 'Change picture')}
-              </Button>
-              {picture?.path && (
-                <Button type="button" secondary={true} onClick={removePicture}>
-                  {t('remove', 'Remove')}
+      {!forcePasswordChange && (
+        <FormProvider {...form}>
+          <div className="my-[16px] mt-[16px] bg-sixth border-fifth border rounded-[4px] p-[24px] flex flex-col gap-[20px]">
+            <div className="flex items-center gap-[16px]">
+              <div className="h-[64px] w-[64px] rounded-full bg-newBgColorInner border border-newTableBorder overflow-hidden flex items-center justify-center text-[24px] font-[600]">
+                {picture?.path ? (
+                  <img
+                    src={picture.path}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  (user?.email || '?').slice(0, 1).toUpperCase()
+                )}
+              </div>
+              <div className="flex gap-[8px]">
+                <Button type="button" onClick={openMedia}>
+                  {t('change_picture', 'Change picture')}
                 </Button>
-              )}
+                {picture?.path && (
+                  <Button
+                    type="button"
+                    secondary={true}
+                    onClick={removePicture}
+                  >
+                    {t('remove', 'Remove')}
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            <Input
+              label={t('full_name', 'Full name')}
+              name="fullname"
+              placeholder={t('full_name', 'Full name')}
+            />
+            <Input
+              label={t('bio', 'Bio')}
+              name="bio"
+              placeholder={t('bio', 'Bio')}
+            />
+            <Input
+              label={t('email', 'Email')}
+              name="email"
+              value={user?.email || ''}
+              disableForm={true}
+              disabled={true}
+            />
+            <div>
+              <Button
+                type="button"
+                loading={loadingProfile}
+                onClick={form.handleSubmit(submitProfile)}
+              >
+                {t('save_profile', 'Save profile')}
+              </Button>
             </div>
           </div>
-
-          <Input
-            label={t('full_name', 'Full name')}
-            name="fullname"
-            placeholder={t('full_name', 'Full name')}
-          />
-          <Input
-            label={t('bio', 'Bio')}
-            name="bio"
-            placeholder={t('bio', 'Bio')}
-          />
-          <Input
-            label={t('email', 'Email')}
-            name="email"
-            value={user?.email || ''}
-            disableForm={true}
-            disabled={true}
-          />
-          <div>
-            <Button
-              type="button"
-              loading={loadingProfile}
-              onClick={form.handleSubmit(submitProfile)}
-            >
-              {t('save_profile', 'Save profile')}
-            </Button>
-          </div>
-        </div>
-      </FormProvider>
+        </FormProvider>
+      )}
 
       {canChangePassword && (
         <div className="my-[16px] mt-0 bg-sixth border-fifth border rounded-[4px] p-[24px] flex flex-col gap-[20px]">
@@ -187,14 +206,23 @@ export const ProfileComponent: FC = () => {
               {t('change_password', 'Change password')}
             </div>
             <div className="text-[12px] text-customColor18 mt-[4px]">
-              {t(
-                'change_password_description',
-                'Use your current password to set a new one'
-              )}
+              {forcePasswordChange
+                ? t(
+                    'change_temporary_password_description',
+                    'Enter the temporary password you used to sign in and set a new one.'
+                  )
+                : t(
+                    'change_password_description',
+                    'Use your current password to set a new one'
+                  )}
             </div>
           </div>
           <PasswordInput
-            label={t('current_password', 'Current password')}
+            label={
+              forcePasswordChange
+                ? t('temporary_password', 'Temporary password')
+                : t('current_password', 'Current password')
+            }
             value={passwords.currentPassword}
             onChange={(value) =>
               setPasswords((state) => ({
@@ -251,6 +279,7 @@ const PasswordInput: FC<{
       className="bg-newBgColorInner h-[42px] border-newTableBorder border rounded-[8px] px-[16px] outline-none text-[14px] text-textColor"
       type="password"
       value={value}
+      placeholder={label}
       onChange={(event) => onChange(event.target.value)}
     />
   </div>
