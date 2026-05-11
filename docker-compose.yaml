@@ -1,6 +1,8 @@
 services:
   postiz:
-    image: ghcr.io/gitroomhq/postiz-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     container_name: postiz
     restart: always
     environment:
@@ -96,7 +98,6 @@ services:
 
       # === Developer Settings
       NX_ADD_PLUGINS: false
-
       # === Short Link Service Settings (Optional - leave blank if unused)
       # DUB_TOKEN: ""
       # DUB_API_ENDPOINT: "https://api.dub.co"
@@ -124,7 +125,11 @@ services:
         condition: service_healthy
 
   postiz-postgres:
-    image: postgres:17-alpine
+    # Use the same major PostgreSQL version as the existing data directory.
+    # The development compose file initializes the database with PostgreSQL 16, so
+    # we pin the service to version 16‑alpine to avoid "database files are
+    # incompatible" errors when reusing volumes【609012487520422†L49-L64】.
+    image: postgres:16-alpine
     container_name: postiz-postgres
     restart: always
     environment:

@@ -41,6 +41,7 @@ import { StreakComponent } from '@gitroom/frontend/components/layout/streak.comp
 import { PreConditionComponent } from '@gitroom/frontend/components/layout/pre-condition.component';
 import { AttachToFeedbackIcon } from '@gitroom/frontend/components/new-layout/sentry.feedback.component';
 import { FirstBillingComponent } from '@gitroom/frontend/components/billing/first.billing.component';
+import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
 
 const jakartaSans = Plus_Jakarta_Sans({
   weight: ['600', '500', '700'],
@@ -58,13 +59,58 @@ export const LayoutComponent = ({ children }: { children: ReactNode }) => {
   const load = useCallback(async (path: string) => {
     return await (await fetch(path)).json();
   }, []);
-  const { data: user, mutate } = useSWR('/user/self', load, {
+  const { data: user, mutate, error, isLoading } = useSWR('/user/self', load, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
     revalidateIfStale: false,
     refreshWhenOffline: false,
     refreshWhenHidden: false,
   });
+
+  if (isLoading && !user) {
+    return (
+      <div
+        className={clsx(
+          'flex min-h-screen min-w-screen items-center justify-center bg-newBgLineColor text-newTextColor p-[24px]',
+          jakartaSans.className
+        )}
+      >
+        <LoadingComponent />
+      </div>
+    );
+  }
+
+  if (error && !user) {
+    return (
+      <div
+        className={clsx(
+          'flex min-h-screen min-w-screen items-center justify-center bg-newBgLineColor text-newTextColor p-[24px]',
+          jakartaSans.className
+        )}
+      >
+        <div className="w-full max-w-[560px] rounded-[16px] border border-newTableBorder bg-newBgColorInner p-[24px] text-center">
+          <div className="text-[24px] font-[600]">
+            Unable to load your workspace
+          </div>
+          <div className="mt-[12px] text-[14px] text-textItemBlur">
+            Postiz could not reach the API needed to render this page.
+          </div>
+          <div className="mt-[8px] text-[13px] text-textItemBlur">
+            Backend URL: {backendUrl}
+          </div>
+          <div className="mt-[20px] flex justify-center">
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              className="rounded-[8px] bg-btnText px-[16px] py-[10px] text-[14px] font-[600] text-black"
+            >
+              Reload page
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!user) return null;
 
