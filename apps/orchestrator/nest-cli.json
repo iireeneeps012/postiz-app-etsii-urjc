@@ -3,7 +3,7 @@
   "collection": "@nestjs/schematics",
   "monorepo": false,
   "sourceRoot": "src",
-  "entryFile": "../../dist/orchestrator/apps/orchestrator/src/main",
+  "entryFile": "main",
   "language": "ts",
   "generateOptions": {
     "spec": false
